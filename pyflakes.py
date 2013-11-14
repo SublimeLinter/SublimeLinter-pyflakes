@@ -23,7 +23,7 @@ class Pyflakes(Linter):
     language = 'python'
     executable = 'pyflakes'
     regex = (
-        r'^.+?:(?P<line>\d+):\s*(?P<error>.+?(?P<near>\'.+?\')?.*)'
+        r'^.+?:(?P<line>\d+):\s*(?P<error>[^\']+(?P<near>\'.+?\')?.*)'
         r'(?:\n(?P<code>.+)'
         r'\n(?P<pos>\s+)\^)?'
     )
@@ -43,7 +43,7 @@ class Pyflakes(Linter):
             use_python3 = SHEBANG_RE.match(self.code) is not None
 
             if not use_python3:
-                use_python3 = self.view_settings.get('language') == 'python3'
+                use_python3 = self.get_view_settings().get('language') == 'python3'
 
         if use_python3:
             if self.python3 is None:
@@ -58,17 +58,9 @@ class Pyflakes(Linter):
 
     def split_match(self, match):
         match, row, col, error_type, error, near = super().split_match(match)
-        pos = match.group(4)
+        pos = match.group('pos')
 
         if pos:
             col = len(pos)
-        else:
-            # See if the error message references a name in quotes.
-            # If so, make that `near` so the highlighter will find
-            # and highlight that name on the line.
-            name_match = NAME_RE.match(error)
-
-            if name_match:
-                near = name_match.group(1)
 
         return match, row, col, error_type, error, near
