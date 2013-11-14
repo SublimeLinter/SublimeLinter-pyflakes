@@ -22,11 +22,22 @@ NAME_RE = re.compile(r'.*\'(\w+)\'')
 class Pyflakes(Linter):
     language = 'python'
     executable = 'pyflakes'
-    regex = (
-        r'^.+?:(?P<line>\d+):\s*(?P<error>[^\']+(?P<near>\'.+?\')?.*)'
-        r'(?:\n(?P<code>.+)'
-        r'\n(?P<pos>\s+)\^)?'
-    )
+    regex = r'''
+        .+?:\s*               # filename
+        (?P<line>\d+):\s*     # line number
+
+        # The rest of the line is the error message.
+        # Within that, capture anything within single quotes as 'near'.
+        (?P<error>[^\'\n\r]+(?P<near>\'.+?\')?.*)
+
+        # The error message may be followed by the offending line of code...
+        (?:\r?\n.*
+
+        # and then another line with a caret (preceded by spaces)
+        # pointing to the position where the error occurred.
+        \r?\n(?P<col>\s+)\^)?
+    '''
+    re_flags = re.VERBOSE
     multiline = True
     comment_re = r'\s*#'
     python3 = None
@@ -55,12 +66,3 @@ class Pyflakes(Linter):
                 return None
         else:
             return self.executable_path
-
-    def split_match(self, match):
-        match, row, col, error_type, error, near = super().split_match(match)
-        pos = match.group('pos')
-
-        if pos:
-            col = len(pos)
-
-        return match, row, col, error_type, error, near
