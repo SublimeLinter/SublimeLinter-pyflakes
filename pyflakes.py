@@ -9,19 +9,13 @@
 #
 
 import re
-import sublime
-import sys
 
-from SublimeLinter.lint import Linter
-from SublimeLinter.lint.util import which
-
-SHEBANG_RE = re.compile(r'#!(?:(?:/[^/]+)*[/ ])?python3')
-NAME_RE = re.compile(r'.*\'(\w+)\'')
+from SublimeLinter.lint import PythonLinter
 
 
-class Pyflakes(Linter):
+class Pyflakes(PythonLinter):
     language = 'python'
-    executable = 'pyflakes'
+    cmd = 'pyflakes@python'
     regex = r'''
         .+?:\s*               # filename
         (?P<line>\d+):\s*     # line number
@@ -35,34 +29,7 @@ class Pyflakes(Linter):
 
         # and then another line with a caret (preceded by spaces)
         # pointing to the position where the error occurred.
-        \r?\n(?P<col>\s+)\^)?
+        \r?\n(?P<col>[ ]+)\^)?
     '''
     re_flags = re.VERBOSE
     multiline = True
-    comment_re = r'\s*#'
-    python3 = None
-    pyflakes = None
-
-    def cmd(self):
-        use_python3 = False
-
-        if (self.filename or '').startswith(sublime.packages_path()):
-            if sys.version_info >= (3, 0):
-                use_python3 = True
-
-        if not use_python3:
-            use_python3 = SHEBANG_RE.match(self.code) is not None
-
-            if not use_python3:
-                use_python3 = self.get_view_settings().get('language') == 'python3'
-
-        if use_python3:
-            if self.python3 is None:
-                self.python3 = which('python3') or ''
-
-            if self.python3:
-                return (self.python3, self.executable_path)
-            else:
-                return None
-        else:
-            return self.executable_path
