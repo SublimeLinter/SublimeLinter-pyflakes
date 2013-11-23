@@ -22,7 +22,7 @@ class Pyflakes(PythonLinter):
 
         # The rest of the line is the error message.
         # Within that, capture anything within single quotes as 'near'.
-        (?P<error>[^\'\n\r]+(?P<near>\'.+?\')?.*)
+        (?P<message>[^\'\n\r]+(?P<near>\'.+?\')?.*)
 
         # The error message may be followed by the offending line of code...
         (?:\r?\n.*
