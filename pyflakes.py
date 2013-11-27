@@ -8,12 +8,23 @@
 # License: MIT
 #
 
+"""This module exports the Pyflakes plugin linter class."""
+
+from io import StringIO
 import re
+
+try:
+    from pyflakes.reporter import Reporter
+except ImportError:
+    pass
 
 from SublimeLinter.lint import PythonLinter
 
 
 class Pyflakes(PythonLinter):
+
+    """Provides an interface to the pyflakes python module/script."""
+
     language = 'python'
     cmd = 'pyflakes@python'
     regex = r'''
@@ -33,3 +44,14 @@ class Pyflakes(PythonLinter):
     '''
     re_flags = re.VERBOSE
     multiline = True
+    module = 'pyflakes'
+    check_version = True
+
+    def check(self, code, filename):
+        """Run pyflakes.check on code and return the output."""
+
+        output = StringIO()
+        reporter = Reporter(output, output)
+
+        self.module.api.check(code, filename, reporter=reporter)
+        return output.getvalue()
