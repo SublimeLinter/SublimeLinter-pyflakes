@@ -44,7 +44,7 @@ class Pyflakes(PythonLinter):
     '''
     re_flags = re.VERBOSE
     multiline = True
-    module = 'pyflakes'
+    module = 'pyflakes.api'
     check_version = True
 
     def check(self, code, filename):
@@ -53,5 +53,5 @@ class Pyflakes(PythonLinter):
         output = StringIO()
         reporter = Reporter(output, output)
 
-        self.module.api.check(code, filename, reporter=reporter)
+        self.module.check(code, filename, reporter=reporter)
         return output.getvalue()
