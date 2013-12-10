@@ -11,7 +11,6 @@
 """This module exports the Pyflakes plugin linter class."""
 
 from io import StringIO
-import re
 
 try:
     from pyflakes.reporter import Reporter
@@ -27,7 +26,7 @@ class Pyflakes(PythonLinter):
 
     language = 'python'
     cmd = 'pyflakes@python'
-    regex = r'''
+    regex = r'''(?x)
         .+?:\s*               # filename
         (?P<line>\d+):\s*     # line number
 
@@ -42,7 +41,6 @@ class Pyflakes(PythonLinter):
         # pointing to the position where the error occurred.
         \r?\n(?P<col>[ ]+)\^)?
     '''
-    re_flags = re.VERBOSE
     multiline = True
     module = 'pyflakes.api'
     check_version = True
