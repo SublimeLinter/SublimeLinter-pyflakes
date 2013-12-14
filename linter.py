@@ -1,8 +1,9 @@
 #
-# pyflakes.py
+# linter.py
 # Linter for SublimeLinter3, a code checking framework for Sublime Text 3
 #
 # Written by Ryan Hileman and Aparajita Fishman
+# Copyright (c) 2013 Aparajita Fishman
 #
 # Project: https://github.com/SublimeLinter/SublimeLinter-contrib-pyflakes
 # License: MIT
