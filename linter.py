@@ -25,7 +25,7 @@ class Pyflakes(PythonLinter):
 
     """Provides an interface to the pyflakes python module/script."""
 
-    language = 'python'
+    syntax = 'python'
     cmd = 'pyflakes@python'
     regex = r'''(?x)
         .+?:\s*               # filename
