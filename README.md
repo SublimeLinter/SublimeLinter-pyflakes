@@ -4,6 +4,7 @@ SublimeLinter-pyflakes
 This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3) provides an interface to [pyflakes](https://github.com/pyflakes/pyflakes). It will be used with files that have the “Python” syntax.
 
 ## Installation
+SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Installation).
 
 ### Linter installation
 Before installing this plugin, you must ensure that `pyflakes` is installed on your system. To install `pyflakes`, do the following:
@@ -19,7 +20,7 @@ Before installing this plugin, you must ensure that `pyflakes` is installed on y
    [sudo] pip-3.x install pyflakes
    ```
 
-Now you can proceed to install the SublimeLinter-pyflakes plugin.
+Once pyflakes is installed, you can proceed to install the SublimeLinter-pyflakes plugin if it is not yet installed.
 
 ### Plugin installation
 Please use [Package Control](https://sublime.wbond.net/installation) to install the linter plugin. This will ensure that the plugin will be updated when new versions are available. If you want to install from source so you can modify the source code, you probably know what you are doing so we won’t cover that here.
