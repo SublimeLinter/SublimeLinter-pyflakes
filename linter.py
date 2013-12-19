@@ -17,7 +17,7 @@ try:
 except ImportError:
     pass
 
-from SublimeLinter.lint import PythonLinter
+from SublimeLinter.lint import PythonLinter, util
 
 
 class Pyflakes(PythonLinter):
@@ -42,6 +42,7 @@ class Pyflakes(PythonLinter):
         \r?\n(?P<col>[ ]+)\^)?
     '''
     multiline = True
+    error_stream = util.STREAM_BOTH
     module = 'pyflakes.api'
     check_version = True
 

@@ -34,6 +34,12 @@ To install via Package Control, do the following:
 ## Settings
 For general information on how SublimeLinter works with settings, please see [Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Settings). For information on generic linter settings, please see [Linter Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Linter-Settings).
 
+In addition to the standard SublimeLinter settings, SublimeLinter-pyflakes provides its own settings. Those marked as “Inline Setting” may also be [used inline](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Settings#inline-settings).
+
+|Setting|Description|Inline Setting|Inline Override|
+|:------|:----------|:------------:|:-------------:|
+|@python|A meta setting that indicates the [python version](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Meta-Settings#python) of your source files. Use this inline or at the global level, not within the linter’s settings.|&#10003;| |
+
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
 
