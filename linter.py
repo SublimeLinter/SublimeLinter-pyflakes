@@ -11,12 +11,6 @@
 """This module exports the Pyflakes plugin linter class."""
 
 from io import StringIO
-
-try:
-    from pyflakes.reporter import Reporter
-except ImportError:
-    pass
-
 from SublimeLinter.lint import PythonLinter, util
 
 
@@ -46,11 +40,23 @@ class Pyflakes(PythonLinter):
     module = 'pyflakes.api'
     check_version = True
 
+    # Internal
+    reporter = None
+
     def check(self, code, filename):
         """Run pyflakes.check on code and return the output."""
 
         output = StringIO()
-        reporter = Reporter(output, output)
+        reporter = self.get_reporter()
+        reporter = reporter(output, output)
 
         self.module.check(code, filename, reporter=reporter)
         return output.getvalue()
+
+    def get_reporter(self):
+        """Return pyflakes.Reporter. Must be deferred to runtime."""
+        if self.reporter is None:
+            from pyflakes.reporter import Reporter
+            self.__class__.reporter = Reporter
+
+        return self.reporter
