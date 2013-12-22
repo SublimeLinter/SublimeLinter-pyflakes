@@ -11,7 +11,7 @@
 """This module exports the Pyflakes plugin linter class."""
 
 from io import StringIO
-from SublimeLinter.lint import PythonLinter, util
+from SublimeLinter.lint import PythonLinter
 
 
 class Pyflakes(PythonLinter):
@@ -36,7 +36,6 @@ class Pyflakes(PythonLinter):
         \r?\n(?P<col>[ ]+)\^)?
     '''
     multiline = True
-    error_stream = util.STREAM_BOTH
     module = 'pyflakes.api'
     check_version = True
 
