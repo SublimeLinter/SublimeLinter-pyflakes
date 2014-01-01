@@ -1,10 +1,10 @@
 SublimeLinter-pyflakes
 =========================
 
-This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3) provides an interface to [pyflakes](https://github.com/pyflakes/pyflakes). It will be used with files that have the “Python” syntax.
+This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org) provides an interface to [pyflakes](https://github.com/pyflakes/pyflakes). It will be used with files that have the “Python” syntax.
 
 ## Installation
-SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Installation).
+SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here](http://sublimelinter.readthedocs.org/en/latest/installation.html).
 
 ### Linter installation
 Before installing this plugin, you must ensure that `pyflakes` is installed on your system. To install `pyflakes`, do the following:
@@ -32,13 +32,13 @@ To install via Package Control, do the following:
 1. When the plugin list appears, type `pyflakes`. Among the entries you should see `SublimeLinter-pyflakes`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
 ## Settings
-For general information on how SublimeLinter works with settings, please see [Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Settings). For information on generic linter settings, please see [Linter Settings](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Linter-Settings).
+For general information on how SublimeLinter works with settings, please see [Settings](http://sublimelinter.readthedocs.org/en/latest/settings.html). For information on generic linter settings, please see [Linter Settings](http://sublimelinter.readthedocs.org/en/latest/linter_settings.html).
 
-In addition to the standard SublimeLinter settings, SublimeLinter-pyflakes provides its own settings. Those marked as “Inline Setting” may also be [used inline](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Settings#inline-settings).
+In addition to the standard SublimeLinter settings, SublimeLinter-pyflakes provides its own settings. Those marked as “Inline Setting” may also be [used inline](http://sublimelinter.readthedocs.org/en/latest/settings.html#inline-settings).
 
 |Setting|Description|Inline Setting|Inline Override|
 |:------|:----------|:------------:|:-------------:|
-|@python|A meta setting that indicates the [python version](https://github.com/SublimeLinter/SublimeLinter.github.io/wiki/Meta-Settings#python) of your source files. Use this inline or at the global level, not within the linter’s settings.|&#10003;| |
+|@python|A meta setting that indicates the [python version](http://sublimelinter.readthedocs.org/en/latest/meta_settings.html#python) of your source files. Use this inline or at the global level, not within the linter’s settings.|&#10003;| |
 
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
