@@ -20,6 +20,9 @@ class Pyflakes(PythonLinter):
 
     syntax = ('python', 'python django')
     cmd = 'pyflakes@python'
+    version_args = '--version'
+    version_re = r'(?P<version>\d+\.\d+\.\d+)'
+    version_requirement = '>= 0.7.3'
     regex = r'''(?x)
         .+?:\s*               # filename
         (?P<line>\d+):\s*     # line number
