@@ -1,7 +1,7 @@
 SublimeLinter-pyflakes
 =========================
 
-[![Build Status](https://khancdn.eu/badges.php?service=https%3A%2F%2Ftravis-ci.org%2FSublimeLinter%2FSublimeLinter-pyflakes.png%3Fbranch%3Dmaster)](https://travis-ci.org/SublimeLinter/SublimeLinter-pyflakes)
+[![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-pyflakes.svg?branch=master)](https://travis-ci.org/SublimeLinter/SublimeLinter-pyflakes)
 
 This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org) provides an interface to [pyflakes](https://github.com/pyflakes/pyflakes). It will be used with files that have the “Python” syntax.
 
