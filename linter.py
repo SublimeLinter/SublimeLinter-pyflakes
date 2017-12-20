@@ -11,7 +11,6 @@
 
 """This module exports the Pyflakes plugin linter class."""
 
-from io import StringIO
 from SublimeLinter.lint import PythonLinter
 
 
@@ -19,7 +18,7 @@ class Pyflakes(PythonLinter):
     """Provides an interface to the pyflakes python module/script."""
 
     syntax = 'python'
-    cmd = 'pyflakes@python'
+    cmd = 'pyflakes'
     version_args = '--version'
     version_re = r'(?P<version>\d+\.\d+\.\d+)'
     version_requirement = '>= 0.7.3'
@@ -39,26 +38,3 @@ class Pyflakes(PythonLinter):
         \r?\n(?P<col>[ ]+)\^)?
     '''
     multiline = True
-    module = 'pyflakes.api'
-    check_version = True
-
-    # Internal
-    reporter = None
-
-    def check(self, code, filename):
-        """Run pyflakes.check on code and return the output."""
-
-        output = StringIO()
-        reporter = self.get_reporter()
-        reporter = reporter(output, output)
-
-        self.module.check(code, filename, reporter=reporter)
-        return output.getvalue()
-
-    def get_reporter(self):
-        """Return pyflakes.Reporter. Must be deferred to runtime."""
-        if self.reporter is None:
-            from pyflakes.reporter import Reporter
-            self.__class__.reporter = Reporter
-
-        return self.reporter
