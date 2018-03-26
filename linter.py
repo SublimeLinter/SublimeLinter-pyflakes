@@ -1,27 +1,8 @@
-#
-# linter.py
-# Linter for SublimeLinter3, a code checking framework for Sublime Text 3
-#
-# Written by Aparajita Fishman
-# Copyright (c) 2015-2016 The SublimeLinter Community
-# Copyright (c) 2013-2014 Aparajita Fishman
-#
-# License: MIT
-#
-
-"""This module exports the Pyflakes plugin linter class."""
-
 from SublimeLinter.lint import PythonLinter
 
 
 class Pyflakes(PythonLinter):
-    """Provides an interface to the pyflakes python module/script."""
-
-    syntax = 'python'
     cmd = 'pyflakes'
-    version_args = '--version'
-    version_re = r'(?P<version>\d+\.\d+\.\d+)'
-    version_requirement = '>= 0.7.3'
     regex = r'''(?x)
         .+?:\s*               # filename
         (?P<line>\d+):\s*     # line number
@@ -38,3 +19,6 @@ class Pyflakes(PythonLinter):
         \r?\n(?P<col>[ ]+)\^)?
     '''
     multiline = True
+    defaults = {
+        'selector': 'source.python'
+    }
