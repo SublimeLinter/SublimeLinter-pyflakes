@@ -32,8 +32,8 @@ class Pyflakes(PythonLinter):
             text = vv.select_line(line)
             pattern = r"\s({}|{})".format(last_part, import_id)
 
-            match = re.search(pattern, text)
-            if match:
-                return line, match.start(1), match.end(1)
+            re_match = re.search(pattern, text)
+            if re_match:
+                return line, re_match.start(1), re_match.end(1)
 
         return super().reposition_match(line, col, match, vv)
