@@ -18,6 +18,32 @@ class Pyflakes(PythonLinter):
         'selector': 'source.python'
     }
 
+    def split_match(self, match):
+        # mark properly the type error message
+
+        error = super().split_match(match)
+        if not error['match']:
+            return None
+
+        warning_msg_regex = r'''(?x)
+        \b(?:
+        used|
+        unused|
+        redefines|
+        shadowed|
+        (may\sbe)
+        )\b
+        '''
+
+        warning_msg_regex = re.compile(warning_msg_regex, 0)
+
+        if warning_msg_regex.search(error['message']):
+            error['warning'] = 'warning'
+        else:
+            error['error'] = 'error'
+
+        return error
+
     def reposition_match(self, line, col, match, vv):
         if 'imported but unused' in match.message:
             # Consider:
