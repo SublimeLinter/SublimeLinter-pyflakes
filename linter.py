@@ -17,15 +17,7 @@ class Pyflakes(PythonLinter):
     defaults = {
         'selector': 'source.python'
     }
-
-    def split_match(self, match):
-        # mark properly the type error message
-
-        error = super().split_match(match)
-        if not error['match']:
-            return None
-
-        warning_msg_regex = r'''(?x)
+    warning_msg_regex = r'''(?x)
         \b(?:
         used|
         unused|
@@ -33,14 +25,20 @@ class Pyflakes(PythonLinter):
         shadowed|
         (may\sbe)
         )\b
-        '''
+    '''
 
-        warning_msg_regex = re.compile(warning_msg_regex, 0)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.warning_msg_regex = re.compile(self.warning_msg_regex, 0)
 
-        if warning_msg_regex.search(error['message']):
-            error['warning'] = 'warning'
+    def split_match(self, match):
+        # mark properly the type error message
+
+        error = super().split_match(match)
+        if self.warning_msg_regex.search(error['message']):
+            error['error_type'] = 'warning'
         else:
-            error['error'] = 'error'
+            error['error_type'] = 'error'
 
         return error
 
