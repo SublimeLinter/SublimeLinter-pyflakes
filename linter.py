@@ -5,7 +5,7 @@ import re
 class Pyflakes(PythonLinter):
     cmd = 'pyflakes'
     regex = r'''(?x)
-        ^(?P<filename>.+):(?P<line>\d+):((?P<col>\d+):?)?\s
+        ^(?P<filename>.+?):(?P<line>\d+):((?P<col>\d+):?)?\s
 
         # The rest of the line is the error message.
         # Within that, capture anything within single quotes as `near`.
