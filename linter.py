@@ -17,6 +17,30 @@ class Pyflakes(PythonLinter):
     defaults = {
         'selector': 'source.python'
     }
+    warning_msg_regex = r'''(?x)
+        \b(?:
+        used|
+        unused|
+        redefines|
+        shadowed|
+        (may\sbe)
+        )\b
+    '''
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.warning_msg_regex = re.compile(self.warning_msg_regex, 0)
+
+    def split_match(self, match):
+        # mark properly the type error message
+
+        error = super().split_match(match)
+        if self.warning_msg_regex.search(error['message']):
+            error['error_type'] = 'warning'
+        else:
+            error['error_type'] = 'error'
+
+        return error
 
     def reposition_match(self, line, col, match, vv):
         if 'imported but unused' in match.message:
